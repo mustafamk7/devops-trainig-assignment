@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  postgresdb:
+    image: postgres
+    # restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - POSTGRES_USER=$DATABASE_USER
+      - POSTGRES_PASSWORD=$DATABASE_PASSWORD
+      - POSTGRES_DB=$DATABASE
+    ports:
+      - 5433:5432
+    volumes:
+      - db:/var/lib/postgres
+  backend:
+    depends_on:
+      - postgresdb
+    build: .
+    # restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - 8080:3000
+    environment:
+      - DB_HOST=postgresdb
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=mydatabase
+      - DB_PORT=5432
+    stdin_open: true
+    tty: true
+
+volumes: 
+  db:
