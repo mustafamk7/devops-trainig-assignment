@@ -4,10 +4,9 @@ metadata:
   name: nginx-service
 spec:
   selector:
-    app: nginx-depl
+    app: nginx
   ports:
-  - protocol: TCP
-    port: 8080 
-    targetPort: 80 
-    nodePort: 32325
+    - protocol: TCP
+      port: 80
+      targetPort: 80
   type: NodePort
