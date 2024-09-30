@@ -1,0 +1,29 @@
+replicaCount: 3
+labels: nginx
+image:
+  repository: nginx
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+
+ingress:
+  enabled: true
+  host: nginx.ex.com
+
+config:
+  appName: MyApplication
+  appVersion: 1.0.0
+
+secret:
+  dbPassword: "a2hhbmJoYWltaw=="
+
+persistence:
+  enabled: true
+  size: 1Gi
+  path: /mnt/data
+
+envDeployment:
+  enabled: true
