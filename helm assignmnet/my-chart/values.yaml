@@ -6,7 +6,7 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 80
 
 ingress:
@@ -24,6 +24,8 @@ persistence:
   enabled: true
   size: 1Gi
   path: /mnt/data
+  accessMode: ReadWriteOnce
+  mountPath: /usr/share/nginx/html
 
 envDeployment:
   enabled: true
